@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 export default function TextForm(props) {
   const handleUpClick = () => {
@@ -15,25 +16,40 @@ export default function TextForm(props) {
     console.log("Changed");
     setText(event.target.value);
   };
-  const [text, setText] = useState("Enter Text Here");
+  const [text, setText] = useState("");
   return (
-    <div>
-      <div className="mb-3">
-        <h1>{props.heading}</h1>
-        <textarea
-          className="form-control"
-          id="myText"
-          value={text}
-          onChange={handleOneChange}
-          rows="8"
-        ></textarea>
+    <>
+      <div className="container">
+        <div className="mb-3">
+          <h1>{props.heading}</h1>
+          <textarea
+            className="form-control"
+            id="myText"
+            value={text}
+            onChange={handleOneChange}
+            rows="8"
+          ></textarea>
+        </div>
+        <button className="btn btn-primary mx-1" onClick={handleUpClick}>
+          Convert to Upper Case
+        </button>
+        <button className="btn btn-primary mx-1" onClick={handleLoClick}>
+          Convert to Lower Case
+        </button>
       </div>
-      <button className="btn btn-primary mx-1" onClick={handleUpClick}>
-        Convert to Upper Case
-      </button>
-      <button className="btn btn-primary mx-1" onClick={handleLoClick}>
-        Convert to Lower Case
-      </button>
-    </div>
+      <div className="container my-3">
+        <h2>Your Summary</h2>
+        <p>
+          {text.split(" ").length} Words and {text.length} Characters
+        </p>
+        <p>{0.008 * text.split(" ").length} read time</p>
+        <h2>Preview</h2>
+        <p>{text}</p>
+      </div>
+    </>
   );
 }
+
+TextForm.defaultProps = {
+  heading: "Enter The Text To Analyse",
+};
