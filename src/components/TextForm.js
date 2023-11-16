@@ -12,6 +12,15 @@ export default function TextForm(props) {
     let newText = text.toLowerCase();
     setText(newText);
   };
+  const handleCapClick = () => {
+    const capitalized = text.split(" ").map((word) => {
+      return word[0].toUpperCase() + word.slice(1);
+    });
+    setText(capitalized.join(" "));
+  };
+  const handleClearTextClick = () => {
+    setText("");
+  };
   const handleOneChange = (event) => {
     console.log("Changed");
     setText(event.target.value);
@@ -26,6 +35,7 @@ export default function TextForm(props) {
             className="form-control"
             id="myText"
             value={text}
+            placeholder="Type or paste your content here"
             onChange={handleOneChange}
             rows="8"
           ></textarea>
@@ -35,6 +45,12 @@ export default function TextForm(props) {
         </button>
         <button className="btn btn-primary mx-1" onClick={handleLoClick}>
           Convert to Lower Case
+        </button>
+        <button className="btn btn-primary mx-1" onClick={handleCapClick}>
+          Convert to Capitalised Case
+        </button>
+        <button className="btn btn-primary mx-1" onClick={handleClearTextClick}>
+          Clear Text
         </button>
       </div>
       <div className="container my-3">
