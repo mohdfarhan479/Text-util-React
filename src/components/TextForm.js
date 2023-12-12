@@ -24,7 +24,16 @@ export default function TextForm(props) {
   const handleClearTextClick = () => {
     setText("");
   };
-  const handleOneChange = (event) => {
+  const handleCopyTextClick = () => {
+    let text = document.getElementById("myText");
+    text.select();
+    navigator.clipboard.writeText(text.value);
+  };
+  const handleExtraSpace = () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+  };
+  const handleOnChange = (event) => {
     console.log("Changed");
     setText(event.target.value);
   };
@@ -39,7 +48,7 @@ export default function TextForm(props) {
             id="myText"
             value={text}
             placeholder="Type or paste your content here"
-            onChange={handleOneChange}
+            onChange={handleOnChange}
             rows="8"
           ></textarea>
         </div>
@@ -54,6 +63,12 @@ export default function TextForm(props) {
         </button>
         <button className="btn btn-primary mx-1" onClick={handleClearTextClick}>
           Clear Text
+        </button>
+        <button className="btn btn-primary mx-1" onClick={handleCopyTextClick}>
+          Copy Text
+        </button>
+        <button className="btn btn-primary mx-1" onClick={handleExtraSpace}>
+          Remove Extra Space
         </button>
       </div>
       <div className="container my-3">
