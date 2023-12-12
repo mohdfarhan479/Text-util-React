@@ -13,9 +13,12 @@ export default function TextForm(props) {
     setText(newText);
   };
   const handleCapClick = () => {
-    const capitalized = text.split(" ").map((word) => {
-      return word[0].toUpperCase() + word.slice(1);
-    });
+    const capitalized = text
+      .trim()
+      .split(" ")
+      .map((word) => {
+        return word[0].toUpperCase() + word.slice(1);
+      });
     setText(capitalized.join(" "));
   };
   const handleClearTextClick = () => {
