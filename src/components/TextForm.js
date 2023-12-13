@@ -40,11 +40,18 @@ export default function TextForm(props) {
   const [text, setText] = useState("");
   return (
     <>
-      <div className="container">
+      <div
+        className="container"
+        style={{ color: props.mode === "light" ? "#0e2843" : "white" }}
+      >
         <div className="mb-3">
           <h1>{props.heading}</h1>
           <textarea
             className="form-control"
+            style={{
+              backgroundColor: props.mode === "light" ? "white" : "#0e2843",
+              color: props.mode === "light" ? "#0e2843" : "white",
+            }}
             id="myText"
             value={text}
             placeholder="Type or paste your content here"
@@ -71,14 +78,21 @@ export default function TextForm(props) {
           Remove Extra Space
         </button>
       </div>
-      <div className="container my-3">
+      <div
+        className="container my-3"
+        style={{ color: props.mode === "light" ? "#0e2843" : "white" }}
+      >
         <h2>Your Summary</h2>
         <p>
           {text.split(" ").length} Words and {text.length} Characters
         </p>
         <p>{0.008 * text.split(" ").length} read time</p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>
+          {text.length > 0
+            ? text
+            : "Enter some text in the above Text Area to Preview it"}
+        </p>
       </div>
     </>
   );
