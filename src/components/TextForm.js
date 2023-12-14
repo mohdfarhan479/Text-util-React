@@ -1,37 +1,52 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 
 export default function TextForm(props) {
   const handleUpClick = () => {
-    console.log("Clicked pressed");
     let newText = text.toUpperCase();
     setText(newText);
+    text
+      ? props.showAlert("Converted to Upper Case", "success")
+      : props.showAlert("Enter some text", "primary");
   };
   const handleLoClick = () => {
-    console.log("Clicked pressed");
     let newText = text.toLowerCase();
     setText(newText);
+    text
+      ? props.showAlert("Converted to Lower Case", "success")
+      : props.showAlert("Enter some text", "primary");
   };
   const handleCapClick = () => {
     const capitalized = text
       .trim()
       .split(" ")
       .map((word) => {
-        return word[0].toUpperCase() + word.slice(1);
+        return text ?? word[0].toUpperCase() + word.slice(1);
       });
     setText(capitalized.join(" "));
+    text
+      ? props.showAlert("Converted to Capitalised Case", "success")
+      : props.showAlert("Enter some text", "primary");
   };
   const handleClearTextClick = () => {
     setText("");
+    text
+      ? props.showAlert("Text Cleared", "success")
+      : props.showAlert("Enter some text", "primary");
   };
   const handleCopyTextClick = () => {
-    let text = document.getElementById("myText");
-    text.select();
-    navigator.clipboard.writeText(text.value);
+    let text1 = document.getElementById("myText");
+    text1.select();
+    navigator.clipboard.writeText(text1.value);
+    text
+      ? props.showAlert("Text Copy to Clipboard", "success")
+      : props.showAlert("Enter some text", "primary");
   };
   const handleExtraSpace = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
+    text
+      ? props.showAlert("Extra Spaced Removed", "success")
+      : props.showAlert("Enter some text", "primary");
   };
   const handleOnChange = (event) => {
     console.log("Changed");
