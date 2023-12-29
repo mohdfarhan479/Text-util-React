@@ -20,7 +20,7 @@ export default function TextForm(props) {
       .trim()
       .split(" ")
       .map((word) => {
-        return text ?? word[0].toUpperCase() + word.slice(1);
+        return word ? word[0].toUpperCase() + word.slice(1) : "";
       });
     setText(capitalized.join(" "));
     text
